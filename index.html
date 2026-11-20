@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una preguntita para Gian 💗</title>
+<style>
+  :root { --pink:#f6a9c8; --deep:#bd477d; --ink:#654052; --cream:#fff8fb; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; display:grid; place-items:center; padding:24px;
+    font-family: "Trebuchet MS", system-ui, sans-serif; color:var(--ink);
+    background: radial-gradient(circle at 15% 15%, #fff 0 8%, transparent 9%),
+                linear-gradient(135deg,#ffe4ef,#fff6fa 55%,#f9d9e8);
+  }
+  .card {
+    width:min(680px,100%); background:rgba(255,255,255,.88);
+    border:1px solid #fff; border-radius:28px; padding:clamp(24px,5vw,46px);
+    box-shadow:0 18px 55px #b85b8222; text-align:center;
+  }
+  .sparkle { font-size:2rem; }
+  h1 { color:var(--deep); font-size:clamp(2rem,6vw,3.1rem); margin:10px 0; }
+  p { line-height:1.7; font-size:1.05rem; }
+  .letter {
+    margin:24px 0; padding:22px; border-radius:20px; background:var(--cream);
+    text-align:left; border:1px dashed #efb3cc;
+  }
+  .letter p { margin:0 0 12px; }
+  .question { color:var(--deep); font-size:1.6rem; font-weight:800; margin:24px 0 16px; }
+  .buttons { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:14px; min-height:76px; }
+  button {
+    border:0; border-radius:999px; padding:14px 28px; font-size:1.05rem;
+    font-weight:800; cursor:pointer; transition:transform .22s ease, padding .22s ease;
+    min-width:116px;
+  }
+  button:focus-visible { outline:3px solid #7e3c61; outline-offset:4px; }
+  #yes { color:white; background:linear-gradient(135deg,#ed79aa,#c94f88); box-shadow:0 8px 18px #d76a9c44; }
+  #no { color:#78576a; background:#f0e8ed; }
+  #message { min-height:52px; color:#b34e7c; font-weight:700; margin:18px 0 0; }
+  .hidden { display:none; }
+  #success { margin-top:24px; padding:24px; border-radius:22px; background:#fff0f6; }
+  #success h2 { color:var(--deep); font-size:2rem; }
+  .small { font-size:.85rem; color:#927887; margin-top:24px; }
+  .heart { color:#e56c9e; }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="sparkle">💌 🌷 💗</div>
+  <h1>Gian, tengo algo que decirte</h1>
+  <p>Quiero hablarte desde el corazón y pedirte perdón.</p>
+
+  <section class="letter">
+    <p> sé que quizá las cosas no salieron como esperábamos y lamento si te hice sentir mal.</p>
+    <p>No quiero prometer que todo será perfecto, pero sí que quiero escuchar, aprender de lo que pasó y demostrar con hechos que me importa hacerlo mejor.</p>
+    <p>Me gustaría que, si tú también quieres, podamos volver a intentarlo con calma y sin presiones. 💗</p>
+    <p>Gracias por leerme.</p>
+  </section>
+
+  <div class="question">¿Me perdonas? 🥺</div>
+  <div class="buttons">
+    <button id="yes" type="button">SÍ 💗</button>
+    <button id="no" type="button">NO</button>
+  </div>
+  <div id="message" aria-live="polite">Elige con el corazón. 💕</div>
+
+  <section id="success" class="hidden" aria-live="polite">
+    <div class="sparkle">🎉 💗 🧸</div>
+    <h2>¡¡¡AAAA, GRACIAS!!!</h2>
+    <p>Te quiero muchísimo, Gian. Gracias por estar dispuesto a dar otra oportunidad. Me gustaría que lo intentemos con cariño, paciencia y hechos. 💞</p>
+    <p class="heart">Un pasito a la vez. ❤️</p>
+  </section>
+  <p class="small">Hecho con cariño. Tu respuesta siempre puede ser sincera. 💌</p>
+</main>
+<script>
+  const yes = document.getElementById('yes');
+  const no = document.getElementById('no');
+  const message = document.getElementById('message');
+  const success = document.getElementById('success');
+  let noCount = 0;
+  const phrases = [
+    '¿Segurito? 🥺',
+    'Una oportunidad para conversar, ¿qué dices? 🌷',
+    'Prometo poner de mi parte, de verdad. 💗',
+    'Bueno, no quiero presionarte… pero aquí sigo con mi cartita 😭',
+    'JAJA, el botón SÍ está creciendo de emoción. 💞'
+  ];
+  no.addEventListener('click', () => {
+    noCount++;
+    message.textContent = phrases[Math.min(noCount - 1, phrases.length - 1)];
+    const scale = Math.min(1 + noCount * 0.16, 2.05);
+    yes.style.transform = `scale(${scale})`;
+    yes.style.padding = `${14 + noCount * 2}px ${28 + noCount * 5}px`;
+  });
+  yes.addEventListener('click', () => {
+    document.querySelector('.question').classList.add('hidden');
+    document.querySelector('.buttons').classList.add('hidden');
+    message.classList.add('hidden');
+    success.classList.remove('hidden');
+    success.scrollIntoView({behavior:'smooth', block:'center'});
+
+    message.textContent = '¡Qué bonito! Gian aceptó intentarlo. 💗';
+  });
+</script>
+</body>
+</html>
